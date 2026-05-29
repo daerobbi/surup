@@ -1,606 +1,823 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Warung Kopi Surup</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700&family=Pinyon+Script&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --espresso: #1a0e06;
-      --roast: #3d1f0a;
-      --mocha: #6b3a1f;
-      --caramel: #c07a3a;
-      --cream: #f5e6d0;
-      --latte: #e8c99a;
-      --foam: #fdf6ec;
-    }
+        <!DOCTYPE html>
+        <html lang="id">
+        <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Warung Kopi Surup</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700&family=Pinyon+Script&display=swap" rel="stylesheet" />
+        <style>
+            :root {
+            --espresso: #1a0e06;
+            --roast: #3d1f0a;
+            --mocha: #6b3a1f;
+            --caramel: #c07a3a;
+            --cream: #f5e6d0;
+            --latte: #e8c99a;
+            --foam: #fdf6ec;
+            }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+            * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      font-family: 'Lato', sans-serif;
-      background-color: var(--espresso);
-      color: var(--cream);
-      overflow-x: hidden;
-    }
+            body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--espresso);
+            color: var(--cream);
+            overflow-x: hidden;
+            }
 
-    .script-font { font-family: 'Pinyon Script', cursive; }
-    .serif-font { font-family: 'Playfair Display', serif; }
+            .script-font { font-family: 'Pinyon Script', cursive; }
+            .serif-font { font-family: 'Playfair Display', serif; }
 
-    /* Grain texture overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0.4;
-    }
+            /* Grain texture overlay */
+            body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.4;
+            }
 
-    /* Hero steam animation */
-    @keyframes steam {
-      0%   { transform: translateY(0) scaleX(1);   opacity: 0.6; }
-      50%  { transform: translateY(-30px) scaleX(1.3); opacity: 0.3; }
-      100% { transform: translateY(-60px) scaleX(0.8); opacity: 0; }
-    }
-    .steam { animation: steam 2.5s ease-in-out infinite; }
-    .steam:nth-child(2) { animation-delay: 0.8s; }
-    .steam:nth-child(3) { animation-delay: 1.6s; }
+            /* Hero steam animation */
+            @keyframes steam {
+            0%   { transform: translateY(0) scaleX(1);   opacity: 0.6; }
+            50%  { transform: translateY(-30px) scaleX(1.3); opacity: 0.3; }
+            100% { transform: translateY(-60px) scaleX(0.8); opacity: 0; }
+            }
+            .steam { animation: steam 2.5s ease-in-out infinite; }
+            .steam:nth-child(2) { animation-delay: 0.8s; }
+            .steam:nth-child(3) { animation-delay: 1.6s; }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(32px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .fade-up { animation: fadeUp 0.8s ease forwards; }
-    .delay-1 { animation-delay: 0.2s; opacity: 0; }
-    .delay-2 { animation-delay: 0.4s; opacity: 0; }
-    .delay-3 { animation-delay: 0.6s; opacity: 0; }
-    .delay-4 { animation-delay: 0.8s; opacity: 0; }
+            @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(32px); }
+            to   { opacity: 1; transform: translateY(0); }
+            }
+            .fade-up { animation: fadeUp 0.8s ease forwards; }
+            .delay-1 { animation-delay: 0.2s; opacity: 0; }
+            .delay-2 { animation-delay: 0.4s; opacity: 0; }
+            .delay-3 { animation-delay: 0.6s; opacity: 0; }
+            .delay-4 { animation-delay: 0.8s; opacity: 0; }
 
-    @keyframes rotateSlow {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-    .spin-slow { animation: rotateSlow 20s linear infinite; }
+            @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+            }
+            .spin-slow { animation: rotateSlow 20s linear infinite; }
 
-    /* Decorative circle divider */
-    .divider-bean {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .divider-bean::before,
-    .divider-bean::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--caramel), transparent);
-    }
+            /* Decorative circle divider */
+            .divider-bean {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            }
+            .divider-bean::before,
+            .divider-bean::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--caramel), transparent);
+            }
 
-    /* Card hover lift */
-    .menu-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .menu-card:hover {
-      transform: translateY(-6px);
-    }
+            /* Card hover lift */
+            .menu-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .menu-card:hover {
+            transform: translateY(-6px);
+            }
 
-    /* Nav link underline */
-    .nav-link {
-      position: relative;
-      transition: color 0.2s;
-    }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--caramel);
-      transition: width 0.3s ease;
-    }
-    .nav-link:hover::after { width: 100%; }
-    .nav-link:hover { color: var(--caramel); }
+            /* Nav link underline */
+            .nav-link {
+            position: relative;
+            transition: color 0.2s;
+            }
+            .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--caramel);
+            transition: width 0.3s ease;
+            }
+            .nav-link:hover::after { width: 100%; }
+            .nav-link:hover { color: var(--caramel); }
 
-    /* Scroll smooth */
-    html { scroll-behavior: smooth; }
+            /* Scroll smooth */
+            html { scroll-behavior: smooth; }
 
-    /* Badge pill */
-    .badge {
-      display: inline-block;
-      padding: 2px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
+            /* Badge pill */
+            .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+            }
 
-    .ring-caramel {
-      outline: 1.5px solid var(--caramel);
-      outline-offset: 3px;
-    }
+            .ring-caramel {
+            outline: 1.5px solid var(--caramel);
+            outline-offset: 3px;
+            }
 
-    /* Scrollbar style */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--espresso); }
-    ::-webkit-scrollbar-thumb { background: var(--mocha); border-radius: 3px; }
-  </style>
-</head>
-<body>
+            /* Scrollbar style */
+            ::-webkit-scrollbar { width: 6px; }
+            ::-webkit-scrollbar-track { background: var(--espresso); }
+            ::-webkit-scrollbar-thumb { background: var(--mocha); border-radius: 3px; }
+        </style>
+        </head>
+        <body>
 
-<!-- ── NAVBAR ── -->
-<header class="fixed top-0 left-0 right-0 z-50" style="background: rgba(26,14,6,0.92); backdrop-filter: blur(12px); border-bottom: 0.5px solid rgba(192,122,58,0.25);">
-  <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <img
-    src="logo.png"
-    alt="Logo Kopi Surup"
-    class="w-24 h-24 object-contain"
-  >
-      <span class="serif-font text-xl font-bold" style="color: var(--latte);">Warung Kopi <span style="color:var(--caramel)">Surup</span></span>
-    </div>
-    <ul class="hidden md:flex items-center gap-8">
-      <li><a href="#tentang" class="nav-link text-sm tracking-wider" style="color:var(--cream);">Tentang</a></li>
-      <li><a href="#menu" class="nav-link text-sm tracking-wider" style="color:var(--cream);">Menu</a></li>
-      <li><a href="#galeri" class="nav-link text-sm tracking-wider" style="color:var(--cream);">Galeri</a></li>
-      <li><a href="#lokasi" class="nav-link text-sm tracking-wider" style="color:var(--cream);">Lokasi</a></li>
-    </ul>
-    <a href="#lokasi" class="hidden md:block text-xs tracking-widest uppercase px-5 py-2 border font-bold transition-all duration-300 hover:bg-amber-800" style="border-color:var(--caramel); color:var(--caramel); border-radius: 2px;">
-      Kunjungi Kami
-    </a>
-  </nav>
-</header>
+        <!-- ========================= -->
+    <!-- NAVBAR -->
+    <!-- ========================= -->
+    <header
+    class="fixed top-0 left-0 right-0 z-50"
+    style="
+        height: 90px;
+        background: rgba(26, 14, 6, 0.92);
+        backdrop-filter: blur(12px);
+        border-bottom: 0.5px solid rgba(192, 122, 58, 0.25);
+    "
+    >
+    <nav
+        class="max-w-6xl mx-auto h-full px-6 flex items-center justify-between"
+    >
+        <!-- Logo & Brand -->
+        <div class="flex items-center gap-3">
+        <img
+            src="logo.png"
+            alt="Logo Kopi Surup"
+            class="h-20 w-auto object-contain"
+        />
 
-<!-- ── HERO ── -->
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <span
+            class="serif-font text-xl font-bold"
+            style="color: var(--latte);"
+        >
+            Warung Kopi
+            <span style="color: var(--caramel);">
+            Surup
+            </span>
+        </span>
+        </div>
 
-  <!-- Background radial glow -->
-  <div class="absolute inset-0" style="background: radial-gradient(ellipse 80% 60% at 50% 60%, rgba(61,31,10,0.9) 0%, var(--espresso) 70%);"></div>
+        <!-- Menu -->
+        <ul class="hidden md:flex items-center gap-8">
+        <li>
+            <a
+            href="#tentang"
+            class="nav-link text-sm tracking-wider"
+            style="color: var(--cream);"
+            >
+            Tentang
+            </a>
+        </li>
 
-  <!-- Decorative rotating ring -->
-  <div class="absolute opacity-10 spin-slow" style="width: 600px; height: 600px; border: 1px dashed var(--caramel); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
-  <div class="absolute opacity-5" style="width: 750px; height: 750px; border: 1px solid var(--latte); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        <li>
+            <a
+            href="#menu"
+            class="nav-link text-sm tracking-wider"
+            style="color: var(--cream);"
+            >
+            Menu
+            </a>
+        </li>
+
+        <li>
+            <a
+            href="#galeri"
+            class="nav-link text-sm tracking-wider"
+            style="color: var(--cream);"
+            >
+            Galeri
+            </a>
+        </li>
+
+        <li>
+            <a
+            href="#lokasi"
+            class="nav-link text-sm tracking-wider"
+            style="color: var(--cream);"
+            >
+            Lokasi
+            </a>
+        </li>
+        </ul>
+
+        <!-- CTA Button -->
+        <a
+        href="#lokasi"
+        class="hidden md:block text-xs tracking-widest uppercase px-5 py-2 border font-bold transition-all duration-300 hover:bg-amber-800"
+        style="
+            border-color: var(--caramel);
+            color: var(--caramel);
+            border-radius: 2px;
+        "
+        >
+        Kunjungi Kami
+        </a>
+    </nav>
+    </header>
+
+        <!-- ── HERO ── -->
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+
+        <!-- Background radial glow -->
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse 80% 60% at 50% 60%, rgba(61,31,10,0.9) 0%, var(--espresso) 70%);"></div>
+
+        <!-- Decorative rotating ring -->
+        <div class="absolute opacity-10 spin-slow" style="width: 600px; height: 600px; border: 1px dashed var(--caramel); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        <div class="absolute opacity-5" style="width: 750px; height: 750px; border: 1px solid var(--latte); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
 
 
-  <!-- Hero Text -->
-  <div class="relative z-10 text-center px-6 max-w-3xl mx-auto">
-    <p class="script-font fade-up delay-1 mb-2" style="font-size: 2rem; color: var(--caramel); line-height:1;">Selamat Datang di</p>
-    <h1 class="serif-font fade-up delay-2 font-black mb-4" style="font-size: clamp(3rem, 8vw, 6rem); line-height: 1.05; color: var(--foam); text-shadow: 0 4px 30px rgba(192,122,58,0.3);">
-      Warung Kopi<br/><span style="color: var(--caramel);">Surup</span>
-    </h1>
-    <p class="fade-up delay-3 text-base md:text-lg mb-10 max-w-md mx-auto leading-relaxed" style="color: var(--latte); font-weight:300; letter-spacing: 0.02em;">
-      Tempat ngopi santai dengan cita rasa kopi pilihan, suasana hangat, dan cerita yang mengalir tanpa henti.
-    </p>
-    <div class="fade-up delay-4 flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="#menu" class="px-8 py-3 font-bold tracking-widest text-sm uppercase transition-all duration-300 hover:opacity-80" style="background: var(--caramel); color: var(--espresso); border-radius: 2px;">
-        Lihat Menu
-      </a>
-      <a href="#tentang" class="px-8 py-3 font-bold tracking-widest text-sm uppercase border transition-all duration-300 hover:bg-white/10" style="border-color: rgba(245,230,208,0.4); color: var(--cream); border-radius: 2px;">
-        Cerita Kami
-      </a>
-    </div>
-  </div>
+        <!-- Hero Text -->
+        <div class="relative z-10 text-center px-6 max-w-3xl mx-auto">
+            <p class="script-font fade-up delay-1 mb-2" style="font-size: 2rem; color: var(--caramel); line-height:1;">Selamat Datang di</p>
+            <h1 class="serif-font fade-up delay-2 font-black mb-4" style="font-size: clamp(3rem, 8vw, 6rem); line-height: 1.05; color: var(--foam); text-shadow: 0 4px 30px rgba(192,122,58,0.3);">
+            Warung Kopi<br/><span style="color: var(--caramel);">Surup</span>
+            </h1>
+            <p class="fade-up delay-3 text-base md:text-lg mb-10 max-w-md mx-auto leading-relaxed" style="color: var(--latte); font-weight:300; letter-spacing: 0.02em;">
+            Tempat ngopi santai dengan cita rasa kopi pilihan, suasana hangat, dan cerita yang mengalir tanpa henti.
+            </p>
+            <div class="fade-up delay-4 flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#menu" class="px-8 py-3 font-bold tracking-widest text-sm uppercase transition-all duration-300 hover:opacity-80" style="background: var(--caramel); color: var(--espresso); border-radius: 2px;">
+                Lihat Menu
+            </a>
+            <a href="#tentang" class="px-8 py-3 font-bold tracking-widest text-sm uppercase border transition-all duration-300 hover:bg-white/10" style="border-color: rgba(245,230,208,0.4); color: var(--cream); border-radius: 2px;">
+                Cerita Kami
+            </a>
+            </div>
+        </div>
 
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
-    <span class="text-xs tracking-widest uppercase" style="color: var(--latte);">Scroll</span>
-    <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
-      <rect x="1" y="1" width="14" height="22" rx="7" stroke="currentColor" stroke-width="1.5"/>
-      <rect x="7" y="5" width="2" height="6" rx="1" fill="currentColor" style="animation: steam 1.5s ease-in-out infinite;"/>
-    </svg>
-  </div>
-</section>
-
-<!-- ── ABOUT ── -->
-<section id="tentang" class="py-24 px-6" style="background: var(--roast);">
-  <div class="max-w-5xl mx-auto">
-    <div class="divider-bean mb-4">
-      <span class="badge" style="background: rgba(192,122,58,0.15); color: var(--caramel);">Tentang Kami</span>
-    </div>
-    <div class="grid md:grid-cols-2 gap-16 items-center mt-10">
-      <!-- Visual side -->
-      <div class="relative">
-        <div class="relative overflow-hidden" style="border-radius: 4px;">
-          <!-- Faux photo placeholder with coffee art -->
-          <div class="aspect-[4/5] flex items-center justify-center relative" style="background: linear-gradient(135deg, var(--mocha) 0%, var(--espresso) 100%);">
-            <!-- Coffee bean pattern -->
-            <svg width="100%" height="100%" viewBox="0 0 300 375" fill="none" class="absolute inset-0 opacity-20">
-              <circle cx="60" cy="80" r="18" stroke="var(--caramel)" stroke-width="1.5"/>
-              <path d="M60 62 Q60 80 60 98" stroke="var(--caramel)" stroke-width="1"/>
-              <circle cx="240" cy="140" r="22" stroke="var(--latte)" stroke-width="1.5"/>
-              <path d="M240 118 Q240 140 240 162" stroke="var(--latte)" stroke-width="1"/>
-              <circle cx="150" cy="220" r="28" stroke="var(--caramel)" stroke-width="1.5"/>
-              <path d="M150 192 Q150 220 150 248" stroke="var(--caramel)" stroke-width="1"/>
-              <circle cx="80" cy="300" r="16" stroke="var(--latte)" stroke-width="1"/>
-              <path d="M80 284 Q80 300 80 316" stroke="var(--latte)" stroke-width="0.8"/>
-              <circle cx="230" cy="320" r="20" stroke="var(--caramel)" stroke-width="1"/>
-              <path d="M230 300 Q230 320 230 340" stroke="var(--caramel)" stroke-width="0.8"/>
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+            <span class="text-xs tracking-widest uppercase" style="color: var(--latte);">Scroll</span>
+            <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
+            <rect x="1" y="1" width="14" height="22" rx="7" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="7" y="5" width="2" height="6" rx="1" fill="currentColor" style="animation: steam 1.5s ease-in-out infinite;"/>
             </svg>
-            <!-- Large coffee icon center -->
-            <div class="relative z-10 text-center">
-              <svg width="100" height="120" viewBox="0 0 100 120" fill="none">
-                <ellipse cx="50" cy="38" rx="32" ry="9" stroke="var(--caramel)" stroke-width="2"/>
-                <path d="M18 38 L14 95" stroke="var(--caramel)" stroke-width="2"/>
-                <path d="M82 38 L86 95" stroke="var(--caramel)" stroke-width="2"/>
-                <ellipse cx="50" cy="95" rx="36" ry="9" stroke="var(--caramel)" stroke-width="2"/>
-                <path d="M82 60 Q100 60 100 72 Q100 84 82 84" stroke="var(--latte)" stroke-width="2" fill="none"/>
-              </svg>
-              <p class="script-font mt-4" style="font-size: 1.8rem; color: var(--latte);">sejak 2010</p>
+        </div>
+        </section>
+
+        <!-- ── ABOUT ── -->
+        <section id="tentang" class="py-24 px-6" style="background: var(--roast);">
+        <div class="max-w-5xl mx-auto">
+            <div class="divider-bean mb-4">
+            <span class="badge" style="background: rgba(192,122,58,0.15); color: var(--caramel);">Tentang Kami</span>
             </div>
-          </div>
-        </div>
-        <!-- Floating badge -->
-        <div class="absolute -bottom-6 -right-6 p-5 text-center" style="background: var(--caramel); border-radius: 2px; min-width: 110px;">
-          <p class="serif-font font-bold text-3xl" style="color: var(--espresso);">15+</p>
-          <p class="text-xs font-bold uppercase tracking-wider mt-1" style="color: var(--espresso); opacity: 0.75;">Tahun Berdiri</p>
-        </div>
-      </div>
-
-      <!-- Text side -->
-      <div>
-        <h2 class="serif-font font-bold mb-6" style="font-size: clamp(2rem,4vw,2.8rem); color: var(--foam); line-height: 1.2;">
-          Kopi Lokal,<br/><em>Rasa yang Bicara</em>
-        </h2>
-        <p class="text-base leading-relaxed mb-5" style="color: var(--latte); font-weight: 300;">
-          Warung Kopi Surup lahir dari kecintaan mendalam terhadap kopi Nusantara. Berawal dari warung kecil di pojok gang, kami tumbuh menjadi tempat yang dicintai banyak orang — bukan hanya karena kopinya, tapi karena suasananya yang terasa seperti rumah.
-        </p>
-        <p class="text-base leading-relaxed mb-8" style="color: var(--latte); font-weight: 300;">
-          Setiap cangkir yang kami sajikan menggunakan biji kopi pilihan dari petani lokal Jawa Timur, diproses dengan telaten dan diseduh dengan penuh rasa. Di sini, kopi bukan sekadar minuman — ini adalah ritual.
-        </p>
-        <div class="grid grid-cols-3 gap-4">
-          <div class="text-center p-4" style="background: rgba(192,122,58,0.1); border: 0.5px solid rgba(192,122,58,0.3); border-radius: 2px;">
-            <p class="serif-font font-bold text-2xl" style="color: var(--caramel);">50+</p>
-            <p class="text-xs mt-1 tracking-wide uppercase" style="color: var(--latte);">Menu Minuman</p>
-          </div>
-          <div class="text-center p-4" style="background: rgba(192,122,58,0.1); border: 0.5px solid rgba(192,122,58,0.3); border-radius: 2px;">
-            <p class="serif-font font-bold text-2xl" style="color: var(--caramel);">8</p>
-            <p class="text-xs mt-1 tracking-wide uppercase" style="color: var(--latte);">Varian Biji Kopi</p>
-          </div>
-          <div class="text-center p-4" style="background: rgba(192,122,58,0.1); border: 0.5px solid rgba(192,122,58,0.3); border-radius: 2px;">
-            <p class="serif-font font-bold text-2xl" style="color: var(--caramel);">∞</p>
-            <p class="text-xs mt-1 tracking-wide uppercase" style="color: var(--latte);">Cerita & Tawa</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── MENU ── -->
-<section id="menu" class="py-24 px-6" style="background: var(--espresso);">
-  <div class="max-w-5xl mx-auto">
-    <div class="text-center mb-14">
-      <div class="divider-bean justify-center mb-4">
-        <span class="badge" style="background: rgba(192,122,58,0.15); color: var(--caramel);">Menu Pilihan</span>
-      </div>
-      <h2 class="serif-font font-bold mt-4" style="font-size: clamp(2rem,5vw,3rem); color: var(--foam);">
-        Dari Kebun ke <em style="color:var(--caramel);">Cangkirmu</em>
-      </h2>
-      <p class="mt-3 max-w-md mx-auto text-sm leading-relaxed" style="color: var(--latte); font-weight: 300;">Menu andalan yang telah menemani hari-hari pelanggan kami sejak lama.</p>
-    </div>
-
-    <!-- Menu grid -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <!-- Card 1 -->
-      <div class="menu-card p-6" style="background: var(--roast); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
-        <div class="flex justify-between items-start mb-4">
-          <div class="text-3xl">☕</div>
-          <span class="badge" style="background: rgba(192,122,58,0.2); color: var(--caramel);">Andalan</span>
-        </div>
-        <h3 class="serif-font font-bold text-lg mb-2" style="color: var(--foam);">Kopi Surup Hitam</h3>
-        <p class="text-sm leading-relaxed mb-4" style="color: var(--latte); font-weight: 300;">Kopi tubruk khas warung, diseduh dari biji robusta Jember pilihan. Pahit elegan, aroma tanah yang menenangkan.</p>
-        <div class="flex justify-between items-center pt-3" style="border-top: 0.5px solid rgba(192,122,58,0.2);">
-          <span class="font-bold" style="color: var(--caramel);">Rp 8.000</span>
-          <span class="text-xs" style="color: var(--latte);">/ cangkir</span>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="menu-card p-6" style="background: var(--roast); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
-        <div class="flex justify-between items-start mb-4">
-          <div class="text-3xl">🥛</div>
-          <span class="badge" style="background: rgba(100,200,150,0.15); color: #7ec8a0;">Favorit</span>
-        </div>
-        <h3 class="serif-font font-bold text-lg mb-2" style="color: var(--foam);">Kopi Susu Surup</h3>
-        <p class="text-sm leading-relaxed mb-4" style="color: var(--latte); font-weight: 300;">Perpaduan espresso lokal dengan susu segar, disajikan hangat atau dingin. Creamy, manis, penuh karakter.</p>
-        <div class="flex justify-between items-center pt-3" style="border-top: 0.5px solid rgba(192,122,58,0.2);">
-          <span class="font-bold" style="color: var(--caramel);">Rp 12.000</span>
-          <span class="text-xs" style="color: var(--latte);">/ gelas</span>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="menu-card p-6" style="background: var(--roast); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
-        <div class="flex justify-between items-start mb-4">
-          <div class="text-3xl">🧊</div>
-          <span class="badge" style="background: rgba(100,150,220,0.15); color: #8fb8e8;">Segar</span>
-        </div>
-        <h3 class="serif-font font-bold text-lg mb-2" style="color: var(--foam);">Es Kopi Gula Aren</h3>
-        <p class="text-sm leading-relaxed mb-4" style="color: var(--latte); font-weight: 300;">Kopi dingin dengan sentuhan gula aren asli, lapis susu yang Instagram-worthy. Manis alami, menyegarkan.</p>
-        <div class="flex justify-between items-center pt-3" style="border-top: 0.5px solid rgba(192,122,58,0.2);">
-          <span class="font-bold" style="color: var(--caramel);">Rp 15.000</span>
-          <span class="text-xs" style="color: var(--latte);">/ gelas</span>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="menu-card p-6" style="background: var(--roast); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
-        <div class="flex justify-between items-start mb-4">
-          <div class="text-3xl">🌿</div>
-        </div>
-        <h3 class="serif-font font-bold text-lg mb-2" style="color: var(--foam);">Kopi Jahe Rempah</h3>
-        <p class="text-sm leading-relaxed mb-4" style="color: var(--latte); font-weight: 300;">Kopi bertemu rempah hangat — jahe, kayu manis, kapulaga. Cocok dinikmati sore hari atau malam berangin.</p>
-        <div class="flex justify-between items-center pt-3" style="border-top: 0.5px solid rgba(192,122,58,0.2);">
-          <span class="font-bold" style="color: var(--caramel);">Rp 10.000</span>
-          <span class="text-xs" style="color: var(--latte);">/ cangkir</span>
-        </div>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="menu-card p-6" style="background: var(--roast); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
-        <div class="flex justify-between items-start mb-4">
-          <div class="text-3xl">🍞</div>
-        </div>
-        <h3 class="serif-font font-bold text-lg mb-2" style="color: var(--foam);">Roti Bakar Mentega</h3>
-        <p class="text-sm leading-relaxed mb-4" style="color: var(--latte); font-weight: 300;">Roti panggang renyah, olesan mentega Wijsman, tersedia dengan berbagai topping. Pasangan sempurna kopi pagi.</p>
-        <div class="flex justify-between items-center pt-3" style="border-top: 0.5px solid rgba(192,122,58,0.2);">
-          <span class="font-bold" style="color: var(--caramel);">Rp 12.000</span>
-          <span class="text-xs" style="color: var(--latte);">/ porsi</span>
-        </div>
-      </div>
-
-      <!-- Card 6 – CTA -->
-      <div class="menu-card p-6 flex flex-col items-center justify-center text-center" style="background: linear-gradient(135deg, var(--mocha) 0%, var(--roast) 100%); border: 1.5px solid var(--caramel); border-radius: 4px; min-height: 220px;">
-        <p class="script-font mb-3" style="font-size: 1.6rem; color: var(--latte);">dan masih banyak lagi...</p>
-        <p class="text-sm mb-5" style="color: var(--latte); font-weight: 300;">Datang langsung dan tanyakan menu spesial hari ini</p>
-        <a href="#lokasi" class="px-6 py-2 text-xs font-bold tracking-widest uppercase transition-all duration-300 hover:opacity-80" style="background: var(--caramel); color: var(--espresso); border-radius: 2px;">
-          Kunjungi Warung
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── GALERI / VIBES ── -->
-<section id="galeri" class="py-24 px-6 overflow-hidden" style="background: var(--roast);">
-  <div class="max-w-5xl mx-auto">
-    <div class="text-center mb-14">
-      <div class="divider-bean justify-center mb-4">
-        <span class="badge" style="background: rgba(192,122,58,0.15); color: var(--caramel);">Suasana</span>
-      </div>
-      <h2 class="serif-font font-bold mt-4" style="font-size: clamp(2rem,5vw,3rem); color: var(--foam);">
-        Rasakan <em style="color:var(--caramel);">Vibes-nya</em>
-      </h2>
-    </div>
-
-    <!-- Masonry-style grid with SVG illustrations -->
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-
-      <!-- Block 1 – tall -->
-      <div class="row-span-2 rounded overflow-hidden flex items-center justify-center relative" style="background: linear-gradient(160deg, #3d1f0a 0%, #1a0e06 100%); min-height: 300px; border: 0.5px solid rgba(192,122,58,0.2);">
-        <div class="absolute inset-0 flex items-center justify-center opacity-30">
-          <svg width="160" height="200" viewBox="0 0 160 200" fill="none">
-            <rect x="30" y="60" width="100" height="120" rx="8" fill="var(--mocha)"/>
-            <ellipse cx="80" cy="60" rx="50" ry="14" fill="var(--caramel)"/>
-            <path d="M130 90 Q155 90 155 110 Q155 130 130 130" stroke="var(--latte)" stroke-width="4" fill="none"/>
-            <rect x="10" y="178" width="140" height="16" rx="4" fill="var(--mocha)"/>
-          </svg>
-        </div>
-        <div class="relative z-10 text-center px-4">
-          <p class="script-font" style="font-size: 2.2rem; color: var(--caramel);">Ngopi Santai</p>
-          <p class="text-xs tracking-widest mt-2 uppercase" style="color: var(--latte);">Setiap hari, setiap waktu</p>
-        </div>
-      </div>
-
-      <!-- Block 2 -->
-      <div class="rounded overflow-hidden flex items-center justify-center relative" style="background: linear-gradient(135deg, #6b3a1f 0%, #3d1f0a 100%); min-height: 145px; border: 0.5px solid rgba(192,122,58,0.2);">
-        <div class="text-center p-4">
-          <p class="text-5xl mb-2">🌙</p>
-          <p class="serif-font text-sm font-bold" style="color: var(--foam);">Buka sampai larut</p>
-          <p class="text-xs mt-1" style="color: var(--latte);">06.00 – 24.00 WIB</p>
-        </div>
-      </div>
-
-      <!-- Block 3 -->
-      <div class="rounded overflow-hidden flex items-center justify-center relative" style="background: linear-gradient(135deg, #1a0e06 0%, #3d1f0a 100%); min-height: 145px; border: 0.5px solid rgba(192,122,58,0.2);">
-        <div class="text-center p-4">
-          <p class="text-5xl mb-2">🎵</p>
-          <p class="serif-font text-sm font-bold" style="color: var(--foam);">Harga Terjangkau</p>
-          <p class="text-xs mt-1" style="color: var(--latte);">start from Rp1.000</p>
-        </div>
-      </div>
-
-      <!-- Block 4 -->
-      <div class="rounded overflow-hidden flex items-center justify-center relative" style="background: linear-gradient(135deg, #3d1f0a 0%, #6b3a1f 100%); min-height: 145px; border: 0.5px solid rgba(192,122,58,0.2);">
-        <div class="text-center p-4">
-          <p class="text-5xl mb-2">📶</p>
-          <p class="serif-font text-sm font-bold" style="color: var(--foam);">WiFi Gratis</p>
-          <p class="text-xs mt-1" style="color: var(--latte);">Kencang & stabil</p>
-        </div>
-      </div>
-
-      <!-- Block 5 -->
-      <div class="rounded overflow-hidden flex items-center justify-center relative col-span-2 md:col-span-1" style="background: linear-gradient(160deg, #6b3a1f 0%, #1a0e06 100%); min-height: 145px; border: 0.5px solid rgba(192,122,58,0.2);">
-        <div class="text-center p-4">
-          <p class="text-5xl mb-2">🤝</p>
-          <p class="serif-font text-sm font-bold" style="color: var(--foam);">Tempat Nongkrong</p>
-          <p class="text-xs mt-1" style="color: var(--latte);">Cocok untuk geng, arisan, rapat</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── TESTIMONIALS ── -->
-<section class="py-20 px-6" style="background: var(--espresso);">
-  <div class="max-w-5xl mx-auto">
-    <div class="text-center mb-12">
-      <div class="divider-bean justify-center mb-4">
-        <span class="badge" style="background: rgba(192,122,58,0.15); color: var(--caramel);">Kata Mereka</span>
-      </div>
-      <h2 class="serif-font font-bold mt-4" style="font-size: clamp(1.8rem,4vw,2.5rem); color: var(--foam);">
-        Yang Dirasakan Pelanggan
-      </h2>
-    </div>
-    <div class="grid md:grid-cols-3 gap-6">
-
-      <div class="p-6" style="background: var(--roast); border-left: 3px solid var(--caramel); border-radius: 0 4px 4px 0;">
-        <div class="flex gap-1 mb-3">
-          <span style="color: var(--caramel);">★★★★★</span>
-        </div>
-        <p class="text-sm leading-relaxed italic mb-4" style="color: var(--latte); font-weight: 300;">"Kopi Surupnya beda banget. Ada rasa 'rumah' yang susah dijelasin tapi langsung kerasa begitu pertama tegukan."</p>
-        <p class="font-bold text-sm" style="color: var(--caramel);">— Rizal, Jember</p>
-      </div>
-
-      <div class="p-6" style="background: var(--roast); border-left: 3px solid var(--caramel); border-radius: 0 4px 4px 0;">
-        <div class="flex gap-1 mb-3">
-          <span style="color: var(--caramel);">★★★★★</span>
-        </div>
-        <p class="text-sm leading-relaxed italic mb-4" style="color: var(--latte); font-weight: 300;">"Sudah jadi langganan 7 tahun. Harga terjangkau, kopinya konsisten enak, suasananya selalu bikin betah."</p>
-        <p class="font-bold text-sm" style="color: var(--caramel);">— Siti Aminah, Warga Sekitar</p>
-      </div>
-
-      <div class="p-6" style="background: var(--roast); border-left: 3px solid var(--caramel); border-radius: 0 4px 4px 0;">
-        <div class="flex gap-1 mb-3">
-          <span style="color: var(--caramel);">★★★★★</span>
-        </div>
-        <p class="text-sm leading-relaxed italic mb-4" style="color: var(--latte); font-weight: 300;">"Satu-satunya warung kopi yang selalu bikin saya nunda pulang. Entah karena kopinya atau ngobrolnya yang asik."</p>
-        <p class="font-bold text-sm" style="color: var(--caramel);">— Fadhli, Mahasiswa</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── LOKASI & JAM BUKA ── -->
-<section id="lokasi" class="py-24 px-6" style="background: var(--roast);">
-  <div class="max-w-5xl mx-auto">
-    <div class="text-center mb-14">
-      <div class="divider-bean justify-center mb-4">
-        <span class="badge" style="background: rgba(192,122,58,0.15); color: var(--caramel);">Kunjungi Kami</span>
-      </div>
-      <h2 class="serif-font font-bold mt-4" style="font-size: clamp(2rem,5vw,3rem); color: var(--foam);">
-        Temukan <em style="color:var(--caramel);">Warung Kami</em>
-      </h2>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-10">
-      <!-- Info -->
-      <div class="space-y-6">
-
-        <div class="flex gap-4 items-start p-5" style="background: rgba(192,122,58,0.08); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
-          <div class="text-2xl flex-shrink-0">📍</div>
-          <div>
-            <p class="font-bold text-sm tracking-wider uppercase mb-1" style="color: var(--caramel);">Alamat</p>
-            <p class="text-sm leading-relaxed" style="color: var(--latte);">Andongsari, Ambulu, Jember</p>
-          </div>
-        </div>
-
-        <div class="flex gap-4 items-start p-5" style="background: rgba(192,122,58,0.08); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
-          <div class="text-2xl flex-shrink-0">🕐</div>
-          <div class="w-full">
-            <p class="font-bold text-sm tracking-wider uppercase mb-3" style="color: var(--caramel);">Jam Operasional</p>
-            <div class="space-y-2 text-sm" style="color: var(--latte);">
-              <div class="flex justify-between">
-                <span>Senin – Jumat</span>
-                <span class="font-bold" style="color: var(--foam);">06.00 – 24.00</span>
-              </div>
-              <div class="h-px w-full" style="background: rgba(192,122,58,0.2);"></div>
-              <div class="flex justify-between">
-                <span>Sabtu – Minggu</span>
-                <span class="font-bold" style="color: var(--foam);">06.00 – 01.00</span>
-              </div>
+            <div class="grid md:grid-cols-2 gap-16 items-center mt-10">
+            <!-- Visual side -->
+            <div class="relative">
+                <div class="relative overflow-hidden" style="border-radius: 4px;">
+                <!-- Faux photo placeholder with coffee art -->
+                <div class="aspect-[4/5] flex items-center justify-center relative" style="background: linear-gradient(135deg, var(--mocha) 0%, var(--espresso) 100%);">
+                    <!-- Coffee bean pattern -->
+                    <svg width="100%" height="100%" viewBox="0 0 300 375" fill="none" class="absolute inset-0 opacity-20">
+                    <circle cx="60" cy="80" r="18" stroke="var(--caramel)" stroke-width="1.5"/>
+                    <path d="M60 62 Q60 80 60 98" stroke="var(--caramel)" stroke-width="1"/>
+                    <circle cx="240" cy="140" r="22" stroke="var(--latte)" stroke-width="1.5"/>
+                    <path d="M240 118 Q240 140 240 162" stroke="var(--latte)" stroke-width="1"/>
+                    <circle cx="150" cy="220" r="28" stroke="var(--caramel)" stroke-width="1.5"/>
+                    <path d="M150 192 Q150 220 150 248" stroke="var(--caramel)" stroke-width="1"/>
+                    <circle cx="80" cy="300" r="16" stroke="var(--latte)" stroke-width="1"/>
+                    <path d="M80 284 Q80 300 80 316" stroke="var(--latte)" stroke-width="0.8"/>
+                    <circle cx="230" cy="320" r="20" stroke="var(--caramel)" stroke-width="1"/>
+                    <path d="M230 300 Q230 320 230 340" stroke="var(--caramel)" stroke-width="0.8"/>
+                    </svg>
+                    <!-- Large coffee icon center -->
+                    <div class="relative z-10 text-center">
+                    <svg width="100" height="120" viewBox="0 0 100 120" fill="none">
+                        <ellipse cx="50" cy="38" rx="32" ry="9" stroke="var(--caramel)" stroke-width="2"/>
+                        <path d="M18 38 L14 95" stroke="var(--caramel)" stroke-width="2"/>
+                        <path d="M82 38 L86 95" stroke="var(--caramel)" stroke-width="2"/>
+                        <ellipse cx="50" cy="95" rx="36" ry="9" stroke="var(--caramel)" stroke-width="2"/>
+                        <path d="M82 60 Q100 60 100 72 Q100 84 82 84" stroke="var(--latte)" stroke-width="2" fill="none"/>
+                    </svg>
+                    <p class="script-font mt-4" style="font-size: 1.8rem; color: var(--latte);">sejak 2010</p>
+                    </div>
+                </div>
+                </div>
+                <!-- Floating badge -->
+                <div class="absolute -bottom-6 -right-6 p-5 text-center" style="background: var(--caramel); border-radius: 2px; min-width: 110px;">
+                <p class="serif-font font-bold text-3xl" style="color: var(--espresso);">15+</p>
+                <p class="text-xs font-bold uppercase tracking-wider mt-1" style="color: var(--espresso); opacity: 0.75;">Tahun Berdiri</p>
+                </div>
             </div>
-          </div>
+
+            <!-- Text side -->
+            <div>
+                <h2 class="serif-font font-bold mb-6" style="font-size: clamp(2rem,4vw,2.8rem); color: var(--foam); line-height: 1.2;">
+                Kopi Lokal,<br/><em>Rasa yang Bicara</em>
+                </h2>
+                <p class="text-base leading-relaxed mb-5" style="color: var(--latte); font-weight: 300;">
+                Warung Kopi Surup lahir dari kecintaan mendalam terhadap kopi Nusantara. Berawal dari warung kecil di pojok gang, kami tumbuh menjadi tempat yang dicintai banyak orang — bukan hanya karena kopinya, tapi karena suasananya yang terasa seperti rumah.
+                </p>
+                <p class="text-base leading-relaxed mb-8" style="color: var(--latte); font-weight: 300;">
+                Setiap cangkir yang kami sajikan menggunakan biji kopi pilihan dari petani lokal Jawa Timur, diproses dengan telaten dan diseduh dengan penuh rasa. Di sini, kopi bukan sekadar minuman — ini adalah ritual.
+                </p>
+                <div class="grid grid-cols-3 gap-4">
+                <div class="text-center p-4" style="background: rgba(192,122,58,0.1); border: 0.5px solid rgba(192,122,58,0.3); border-radius: 2px;">
+                    <p class="serif-font font-bold text-2xl" style="color: var(--caramel);">50+</p>
+                    <p class="text-xs mt-1 tracking-wide uppercase" style="color: var(--latte);">Menu Minuman</p>
+                </div>
+                <div class="text-center p-4" style="background: rgba(192,122,58,0.1); border: 0.5px solid rgba(192,122,58,0.3); border-radius: 2px;">
+                    <p class="serif-font font-bold text-2xl" style="color: var(--caramel);">8</p>
+                    <p class="text-xs mt-1 tracking-wide uppercase" style="color: var(--latte);">Varian Biji Kopi</p>
+                </div>
+                <div class="text-center p-4" style="background: rgba(192,122,58,0.1); border: 0.5px solid rgba(192,122,58,0.3); border-radius: 2px;">
+                    <p class="serif-font font-bold text-2xl" style="color: var(--caramel);">∞</p>
+                    <p class="text-xs mt-1 tracking-wide uppercase" style="color: var(--latte);">Cerita & Tawa</p>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- ── MENU ── -->
+        <section id="menu" class="py-24 px-6" style="background: var(--espresso);">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-14">
+            <div class="divider-bean justify-center mb-4">
+                <span class="badge" style="background: rgba(192,122,58,0.15); color: var(--caramel);">Menu Pilihan</span>
+            </div>
+            <h2 class="serif-font font-bold mt-4" style="font-size: clamp(2rem,5vw,3rem); color: var(--foam);">
+                Dari Kebun ke <em style="color:var(--caramel);">Cangkirmu</em>
+            </h2>
+            <p class="mt-3 max-w-md mx-auto text-sm leading-relaxed" style="color: var(--latte); font-weight: 300;">Menu andalan yang telah menemani hari-hari pelanggan kami sejak lama.</p>
+            </div>
+
+            <!-- Menu grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Card 1 -->
+            <div class="menu-card p-6" style="background: var(--roast); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
+                <div class="flex justify-between items-start mb-4">
+                <div class="text-3xl">☕</div>
+                <span class="badge" style="background: rgba(192,122,58,0.2); color: var(--caramel);">Andalan</span>
+                </div>
+                <h3 class="serif-font font-bold text-lg mb-2" style="color: var(--foam);">Kopi Surup Hitam</h3>
+                <p class="text-sm leading-relaxed mb-4" style="color: var(--latte); font-weight: 300;">Kopi tubruk khas warung, diseduh dari biji robusta Jember pilihan. Pahit elegan, aroma tanah yang menenangkan.</p>
+                <div class="flex justify-between items-center pt-3" style="border-top: 0.5px solid rgba(192,122,58,0.2);">
+                <span class="font-bold" style="color: var(--caramel);">Rp 8.000</span>
+                <span class="text-xs" style="color: var(--latte);">/ cangkir</span>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="menu-card p-6" style="background: var(--roast); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
+                <div class="flex justify-between items-start mb-4">
+                <div class="text-3xl">🥛</div>
+                <span class="badge" style="background: rgba(100,200,150,0.15); color: #7ec8a0;">Favorit</span>
+                </div>
+                <h3 class="serif-font font-bold text-lg mb-2" style="color: var(--foam);">Kopi Susu Surup</h3>
+                <p class="text-sm leading-relaxed mb-4" style="color: var(--latte); font-weight: 300;">Perpaduan espresso lokal dengan susu segar, disajikan hangat atau dingin. Creamy, manis, penuh karakter.</p>
+                <div class="flex justify-between items-center pt-3" style="border-top: 0.5px solid rgba(192,122,58,0.2);">
+                <span class="font-bold" style="color: var(--caramel);">Rp 12.000</span>
+                <span class="text-xs" style="color: var(--latte);">/ gelas</span>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="menu-card p-6" style="background: var(--roast); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
+                <div class="flex justify-between items-start mb-4">
+                <div class="text-3xl">🧊</div>
+                <span class="badge" style="background: rgba(100,150,220,0.15); color: #8fb8e8;">Segar</span>
+                </div>
+                <h3 class="serif-font font-bold text-lg mb-2" style="color: var(--foam);">Es Kopi Gula Aren</h3>
+                <p class="text-sm leading-relaxed mb-4" style="color: var(--latte); font-weight: 300;">Kopi dingin dengan sentuhan gula aren asli, lapis susu yang Instagram-worthy. Manis alami, menyegarkan.</p>
+                <div class="flex justify-between items-center pt-3" style="border-top: 0.5px solid rgba(192,122,58,0.2);">
+                <span class="font-bold" style="color: var(--caramel);">Rp 15.000</span>
+                <span class="text-xs" style="color: var(--latte);">/ gelas</span>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="menu-card p-6" style="background: var(--roast); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
+                <div class="flex justify-between items-start mb-4">
+                <div class="text-3xl">🌿</div>
+                </div>
+                <h3 class="serif-font font-bold text-lg mb-2" style="color: var(--foam);">Kopi Jahe Rempah</h3>
+                <p class="text-sm leading-relaxed mb-4" style="color: var(--latte); font-weight: 300;">Kopi bertemu rempah hangat — jahe, kayu manis, kapulaga. Cocok dinikmati sore hari atau malam berangin.</p>
+                <div class="flex justify-between items-center pt-3" style="border-top: 0.5px solid rgba(192,122,58,0.2);">
+                <span class="font-bold" style="color: var(--caramel);">Rp 10.000</span>
+                <span class="text-xs" style="color: var(--latte);">/ cangkir</span>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="menu-card p-6" style="background: var(--roast); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
+                <div class="flex justify-between items-start mb-4">
+                <div class="text-3xl">🍞</div>
+                </div>
+                <h3 class="serif-font font-bold text-lg mb-2" style="color: var(--foam);">Roti Bakar Mentega</h3>
+                <p class="text-sm leading-relaxed mb-4" style="color: var(--latte); font-weight: 300;">Roti panggang renyah, olesan mentega Wijsman, tersedia dengan berbagai topping. Pasangan sempurna kopi pagi.</p>
+                <div class="flex justify-between items-center pt-3" style="border-top: 0.5px solid rgba(192,122,58,0.2);">
+                <span class="font-bold" style="color: var(--caramel);">Rp 12.000</span>
+                <span class="text-xs" style="color: var(--latte);">/ porsi</span>
+                </div>
+            </div>
+
+            <!-- Card 6 – CTA -->
+            <div class="menu-card p-6 flex flex-col items-center justify-center text-center" style="background: linear-gradient(135deg, var(--mocha) 0%, var(--roast) 100%); border: 1.5px solid var(--caramel); border-radius: 4px; min-height: 220px;">
+                <p class="script-font mb-3" style="font-size: 1.6rem; color: var(--latte);">dan masih banyak lagi...</p>
+                <p class="text-sm mb-5" style="color: var(--latte); font-weight: 300;">Datang langsung dan tanyakan menu spesial hari ini</p>
+                <a href="#lokasi" class="px-6 py-2 text-xs font-bold tracking-widest uppercase transition-all duration-300 hover:opacity-80" style="background: var(--caramel); color: var(--espresso); border-radius: 2px;">
+                Kunjungi Warung
+                </a>
+            </div>
+
+            </div>
+        </div>
+        </section>
+
+        <!-- ── GALERI / VIBES ── -->
+        <section id="galeri" class="py-24 px-6 overflow-hidden" style="background: var(--roast);">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-14">
+            <div class="divider-bean justify-center mb-4">
+                <span class="badge" style="background: rgba(192,122,58,0.15); color: var(--caramel);">Suasana</span>
+            </div>
+            <h2 class="serif-font font-bold mt-4" style="font-size: clamp(2rem,5vw,3rem); color: var(--foam);">
+                Rasakan <em style="color:var(--caramel);">Vibes-nya</em>
+            </h2>
+            </div>
+
+            <!-- Masonry-style grid with SVG illustrations -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+
+            <!-- Block 1 – tall -->
+            <div class="row-span-2 rounded overflow-hidden flex items-center justify-center relative" style="background: linear-gradient(160deg, #3d1f0a 0%, #1a0e06 100%); min-height: 300px; border: 0.5px solid rgba(192,122,58,0.2);">
+                <div class="absolute inset-0 flex items-center justify-center opacity-30">
+                <svg width="160" height="200" viewBox="0 0 160 200" fill="none">
+                    <rect x="30" y="60" width="100" height="120" rx="8" fill="var(--mocha)"/>
+                    <ellipse cx="80" cy="60" rx="50" ry="14" fill="var(--caramel)"/>
+                    <path d="M130 90 Q155 90 155 110 Q155 130 130 130" stroke="var(--latte)" stroke-width="4" fill="none"/>
+                    <rect x="10" y="178" width="140" height="16" rx="4" fill="var(--mocha)"/>
+                </svg>
+                </div>
+                <div class="relative z-10 text-center px-4">
+                <p class="script-font" style="font-size: 2.2rem; color: var(--caramel);">Ngopi Santai</p>
+                <p class="text-xs tracking-widest mt-2 uppercase" style="color: var(--latte);">Setiap hari, setiap waktu</p>
+                </div>
+            </div>
+
+            <!-- Block 2 -->
+            <div class="rounded overflow-hidden flex items-center justify-center relative" style="background: linear-gradient(135deg, #6b3a1f 0%, #3d1f0a 100%); min-height: 145px; border: 0.5px solid rgba(192,122,58,0.2);">
+                <div class="text-center p-4">
+                <p class="text-5xl mb-2">🌙</p>
+                <p class="serif-font text-sm font-bold" style="color: var(--foam);">Buka sampai larut</p>
+                <p class="text-xs mt-1" style="color: var(--latte);">06.00 – 24.00 WIB</p>
+                </div>
+            </div>
+
+            <!-- Block 3 -->
+            <div class="rounded overflow-hidden flex items-center justify-center relative" style="background: linear-gradient(135deg, #1a0e06 0%, #3d1f0a 100%); min-height: 145px; border: 0.5px solid rgba(192,122,58,0.2);">
+                <div class="text-center p-4">
+                <p class="text-5xl mb-2">🎵</p>
+                <p class="serif-font text-sm font-bold" style="color: var(--foam);">Harga Terjangkau</p>
+                <p class="text-xs mt-1" style="color: var(--latte);">start from Rp1.000</p>
+                </div>
+            </div>
+
+            <!-- Block 4 -->
+            <div class="rounded overflow-hidden flex items-center justify-center relative" style="background: linear-gradient(135deg, #3d1f0a 0%, #6b3a1f 100%); min-height: 145px; border: 0.5px solid rgba(192,122,58,0.2);">
+                <div class="text-center p-4">
+                <p class="text-5xl mb-2">📶</p>
+                <p class="serif-font text-sm font-bold" style="color: var(--foam);">WiFi Gratis</p>
+                <p class="text-xs mt-1" style="color: var(--latte);">Kencang & stabil</p>
+                </div>
+            </div>
+
+            <!-- Block 5 -->
+            <div class="rounded overflow-hidden flex items-center justify-center relative col-span-2 md:col-span-1" style="background: linear-gradient(160deg, #6b3a1f 0%, #1a0e06 100%); min-height: 145px; border: 0.5px solid rgba(192,122,58,0.2);">
+                <div class="text-center p-4">
+                <p class="text-5xl mb-2">🤝</p>
+                <p class="serif-font text-sm font-bold" style="color: var(--foam);">Tempat Nongkrong</p>
+                <p class="text-xs mt-1" style="color: var(--latte);">Cocok untuk geng, arisan, rapat</p>
+                </div>
+            </div>
+
+            </div>
+        </div>
+        </section>
+
+        <!-- ── TESTIMONIALS ── -->
+        <section class="py-20 px-6" style="background: var(--espresso);">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+            <div class="divider-bean justify-center mb-4">
+                <span class="badge" style="background: rgba(192,122,58,0.15); color: var(--caramel);">Kata Mereka</span>
+            </div>
+            <h2 class="serif-font font-bold mt-4" style="font-size: clamp(1.8rem,4vw,2.5rem); color: var(--foam);">
+                Yang Dirasakan Pelanggan
+            </h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+
+            <div class="p-6" style="background: var(--roast); border-left: 3px solid var(--caramel); border-radius: 0 4px 4px 0;">
+                <div class="flex gap-1 mb-3">
+                <span style="color: var(--caramel);">★★★★★</span>
+                </div>
+                <p class="text-sm leading-relaxed italic mb-4" style="color: var(--latte); font-weight: 300;">"Kopi Surupnya beda banget. Ada rasa 'rumah' yang susah dijelasin tapi langsung kerasa begitu pertama tegukan."</p>
+                <p class="font-bold text-sm" style="color: var(--caramel);">— Rizal, Jember</p>
+            </div>
+
+            <div class="p-6" style="background: var(--roast); border-left: 3px solid var(--caramel); border-radius: 0 4px 4px 0;">
+                <div class="flex gap-1 mb-3">
+                <span style="color: var(--caramel);">★★★★★</span>
+                </div>
+                <p class="text-sm leading-relaxed italic mb-4" style="color: var(--latte); font-weight: 300;">"Sudah jadi langganan 7 tahun. Harga terjangkau, kopinya konsisten enak, suasananya selalu bikin betah."</p>
+                <p class="font-bold text-sm" style="color: var(--caramel);">— Siti Aminah, Warga Sekitar</p>
+            </div>
+
+            <div class="p-6" style="background: var(--roast); border-left: 3px solid var(--caramel); border-radius: 0 4px 4px 0;">
+                <div class="flex gap-1 mb-3">
+                <span style="color: var(--caramel);">★★★★★</span>
+                </div>
+                <p class="text-sm leading-relaxed italic mb-4" style="color: var(--latte); font-weight: 300;">"Satu-satunya warung kopi yang selalu bikin saya nunda pulang. Entah karena kopinya atau ngobrolnya yang asik."</p>
+                <p class="font-bold text-sm" style="color: var(--caramel);">— Fadhli, Mahasiswa</p>
+            </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- ── LOKASI & JAM BUKA ── -->
+        <section id="lokasi" class="py-24 px-6" style="background: var(--roast);">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-14">
+            <div class="divider-bean justify-center mb-4">
+                <span class="badge" style="background: rgba(192,122,58,0.15); color: var(--caramel);">Kunjungi Kami</span>
+            </div>
+            <h2 class="serif-font font-bold mt-4" style="font-size: clamp(2rem,5vw,3rem); color: var(--foam);">
+                Temukan <em style="color:var(--caramel);">Warung Kami</em>
+            </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10">
+            <!-- Info -->
+            <div class="space-y-6">
+
+                <div class="flex gap-4 items-start p-5" style="background: rgba(192,122,58,0.08); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
+                <div class="text-2xl flex-shrink-0">📍</div>
+                <div>
+                    <p class="font-bold text-sm tracking-wider uppercase mb-1" style="color: var(--caramel);">Alamat</p>
+                    <p class="text-sm leading-relaxed" style="color: var(--latte);">Andongsari, Ambulu, Jember</p>
+                </div>
+                </div>
+
+                <div class="flex gap-4 items-start p-5" style="background: rgba(192,122,58,0.08); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
+                <div class="text-2xl flex-shrink-0">🕐</div>
+                <div class="w-full">
+                    <p class="font-bold text-sm tracking-wider uppercase mb-3" style="color: var(--caramel);">Jam Operasional</p>
+                    <div class="space-y-2 text-sm" style="color: var(--latte);">
+                    <div class="flex justify-between">
+                        <span>Senin – Jumat</span>
+                        <span class="font-bold" style="color: var(--foam);">06.00 – 24.00</span>
+                    </div>
+                    <div class="h-px w-full" style="background: rgba(192,122,58,0.2);"></div>
+                    <div class="flex justify-between">
+                        <span>Sabtu – Minggu</span>
+                        <span class="font-bold" style="color: var(--foam);">06.00 – 01.00</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="flex gap-4 items-start p-5" style="background: rgba(192,122,58,0.08); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
+                <div class="text-2xl flex-shrink-0">📞</div>
+                <div>
+                    <p class="font-bold text-sm tracking-wider uppercase mb-1" style="color: var(--caramel);">Kontak</p>
+                    <p class="text-sm" style="color: var(--latte);">WhatsApp: <span style="color: var(--foam);">+62 85148408396</span></p>
+                    <p class="text-sm mt-1" style="color: var(--latte);">Instagram: <span style="color: var(--foam);">@warungkopi.surup</span></p>
+                </div>
+                </div>
+
+            </div>
+
+            <!-- Map placeholder & CTA -->
+            <div class="flex flex-col gap-4">
+            <div
+        class="overflow-hidden"
+        style="
+            border: 0.5px solid rgba(192,122,58,0.3);
+            border-radius: 4px;
+            min-height: 350px;
+        "
+        >
+        <iframe
+            src="https://www.google.com/maps?q=Warung+Kopi+Surup+Andongsari+Ambulu+Jember&output=embed"
+            width="100%"
+            height="350"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
         </div>
 
-        <div class="flex gap-4 items-start p-5" style="background: rgba(192,122,58,0.08); border: 0.5px solid rgba(192,122,58,0.25); border-radius: 4px;">
-          <div class="text-2xl flex-shrink-0">📞</div>
-          <div>
-            <p class="font-bold text-sm tracking-wider uppercase mb-1" style="color: var(--caramel);">Kontak</p>
-            <p class="text-sm" style="color: var(--latte);">WhatsApp: <span style="color: var(--foam);">+62 85148408396</span></p>
-            <p class="text-sm mt-1" style="color: var(--latte);">Instagram: <span style="color: var(--foam);">@warungkopi.surup</span></p>
-          </div>
+        <!-- -->
+
+                <!-- WA CTA -->
+                <a href="https://wa.me/6285148408396" target="_blank" class="flex items-center justify-center gap-3 p-4 font-bold text-sm tracking-wide transition-all duration-300 hover:opacity-90" style="background: #25D366; color: white; border-radius: 4px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                Chat WhatsApp Kami
+                </a>
+            </div>
+            </div>
         </div>
+        </section>
 
-      </div>
+        <!-- ── FOOTER ── -->
+        <footer
+        class="relative pt-16 pb-6 px-6 overflow-hidden"
+        style="
+            background: linear-gradient(
+            180deg,
+            var(--mocha) 0%,
+            var(--espresso) 100%
+            );
+            border-top: 1px solid rgba(192,122,58,0.2);
+        "
+        >
+        <!-- Decorative Line -->
+        <div
+            class="absolute top-0 left-0 w-full h-px"
+            style="
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--caramel),
+                transparent
+            );
+            "
+        ></div>
 
-      <!-- Map placeholder & CTA -->
-      <div class="flex flex-col gap-4">
-       <div
-  class="overflow-hidden"
-  style="
-    border: 0.5px solid rgba(192,122,58,0.3);
-    border-radius: 4px;
-    min-height: 350px;
-  "
->
-  <iframe
-    src="https://www.google.com/maps?q=Warung+Kopi+Surup+Andongsari+Ambulu+Jember&output=embed"
-    width="100%"
-    height="350"
-    style="border:0;"
-    allowfullscreen=""
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade">
-  </iframe>
-</div>
+        <div class="max-w-6xl mx-auto">
 
-<!-- -->
+            <!-- Top Footer -->
+            <div class="grid md:grid-cols-4 gap-10 mb-12">
 
-        <!-- WA CTA -->
-        <a href="https://wa.me/6285148408396" target="_blank" class="flex items-center justify-center gap-3 p-4 font-bold text-sm tracking-wide transition-all duration-300 hover:opacity-90" style="background: #25D366; color: white; border-radius: 4px;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-          Chat WhatsApp Kami
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
+            <!-- Brand -->
+            <div>
+                <h3
+                class="serif-font text-2xl font-bold mb-3"
+                style="color: var(--latte);"
+                >
+                Warung Kopi
+                <span style="color: var(--caramel)">Surup</span>
+                </h3>
 
-<!-- ── FOOTER ── -->
-<footer class="py-12 px-6" style="background: var(--espresso); border-top: 0.5px solid rgba(192,122,58,0.2);">
-  <div class="max-w-5xl mx-auto">
-    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-      <div class="text-center md:text-left">
-        <p class="serif-font font-bold text-xl mb-1" style="color: var(--latte);">Warung Kopi <span style="color:var(--caramel)">Surup</span></p>
-        <p class="text-xs" style="color: var(--latte); opacity: 0.6;">Menyeduh cerita, satu cangkir sekaligus.</p>
-      </div>
-      <div class="flex gap-6 text-sm" style="color: var(--latte); opacity: 0.7;">
-        <a href="#tentang" class="hover:opacity-100 transition-opacity">Tentang</a>
-        <a href="#menu" class="hover:opacity-100 transition-opacity">Menu</a>
-        <a href="#lokasi" class="hover:opacity-100 transition-opacity">Lokasi</a>
-      </div>
-      <p class="text-xs text-center" style="color: var(--latte); opacity: 0.4;">© 2025 Warung Kopi Surup. Semua hak dilindungi.</p>
-    </div>
-  </div>
-</footer>
+                <p
+                class="text-sm leading-relaxed"
+                style="color: var(--latte); opacity: .75;"
+                >
+                Tempat menikmati kopi, berbagi cerita, dan menemukan suasana
+                hangat di setiap senja.
+                </p>
+            </div>
 
-<script>
-  // Intersection Observer for fade-in on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        entry.target.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-      }
-    });
-  }, { threshold: 0.1 });
+            <!-- Navigasi -->
+            <div>
+                <h4
+                class="font-bold mb-4 uppercase tracking-widest text-xs"
+                style="color: var(--caramel);"
+                >
+                Navigasi
+                </h4>
 
-  document.querySelectorAll('.menu-card, section > div > *:not(style)').forEach(el => {
-    observer.observe(el);
-  });
-</script>
+                <ul class="space-y-2 text-sm">
+                <li>
+                    <a href="#tentang" class="hover:opacity-100 transition"
+                    style="color: var(--latte); opacity: .7;">
+                    Tentang Kami
+                    </a>
+                </li>
 
-</body>
-</html>
+                <li>
+                    <a href="#menu" class="hover:opacity-100 transition"
+                    style="color: var(--latte); opacity: .7;">
+                    Menu Kopi
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#galeri" class="hover:opacity-100 transition"
+                    style="color: var(--latte); opacity: .7;">
+                    Galeri
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#lokasi" class="hover:opacity-100 transition"
+                    style="color: var(--latte); opacity: .7;">
+                    Lokasi
+                    </a>
+                </li>
+                </ul>
+            </div>
+
+            <!-- Informasi -->
+            <div>
+                <h4
+                class="font-bold mb-4 uppercase tracking-widest text-xs"
+                style="color: var(--caramel);"
+                >
+                Informasi
+                </h4>
+
+                <ul
+                class="space-y-2 text-sm"
+                style="color: var(--latte); opacity: .75;"
+                >
+                <li>📍 Andongsari, Ambulu, Jember</li>
+                <li>🕒 08.00 - 23.00 WIB</li>
+                <li>☕ Kopi Tradisional & Modern</li>
+                </ul>
+            </div>
+
+            <!-- CTA -->
+            <div>
+                <h4
+                class="font-bold mb-4 uppercase tracking-widest text-xs"
+                style="color: var(--caramel);"
+                >
+                Hubungi Kami
+                </h4>
+
+                <a
+                href="https://wa.me/6285148408396"
+                target="_blank"
+                class="inline-flex items-center justify-center px-5 py-3 font-semibold transition-all duration-300 hover:scale-105"
+                style="
+                    background:#25D366;
+                    color:white;
+                    border-radius:8px;
+                "
+                >
+                WhatsApp
+                </a>
+
+                <div class="flex gap-4 mt-5">
+                <a href="#" style="color:var(--latte);opacity:.7;">Instagram</a>
+                <a href="#" style="color:var(--latte);opacity:.7;">TikTok</a>
+                </div>
+            </div>
+
+            </div>
+
+            <!-- Divider -->
+            <div
+            class="my-6"
+            style="border-top:1px solid rgba(255,255,255,.08);"
+            ></div>
+
+            <!-- Bottom Footer -->
+            <div
+            class="flex flex-col md:flex-row items-center justify-between gap-3"
+            >
+            <p
+                class="text-xs"
+                style="color: var(--latte); opacity: .5;"
+            >
+                © 2025 Warung Kopi Surup. Semua hak dilindungi.
+            </p>
+
+            <p
+                class="text-xs italic"
+                style="color: var(--latte); opacity: .5;"
+            >
+                “Menyeduh cerita, satu cangkir sekaligus.”
+            </p>
+            </div>
+
+        </div>
+        </footer>
+
+        <script>
+        // Intersection Observer for fade-in on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                entry.target.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+            }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.menu-card, section > div > *:not(style)').forEach(el => {
+            observer.observe(el);
+        });
+        </script>
+
+        </body>
+        </html>
