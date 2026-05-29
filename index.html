@@ -636,171 +636,132 @@
         </div>
         </section>
 
-        <!-- ── FOOTER ── -->
-        <footer
-        class="relative pt-16 pb-6 px-6 overflow-hidden"
-        style="
-            background: linear-gradient(
+<!-- ── FOOTER ── -->
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- ── FOOTER ── -->
+<footer
+    class="relative py-10 px-6"
+    style="
+        background: linear-gradient(
             180deg,
             var(--mocha) 0%,
             var(--espresso) 100%
-            );
-            border-top: 1px solid rgba(192,122,58,0.2);
-        "
-        >
-        <!-- Decorative Line -->
-        <div
-            class="absolute top-0 left-0 w-full h-px"
-            style="
+        );
+        border-top: 1px solid rgba(192,122,58,0.2);
+    "
+>
+    <!-- Decorative Line -->
+    <div
+        class="absolute top-0 left-0 w-full h-px"
+        style="
             background: linear-gradient(
                 90deg,
                 transparent,
                 var(--caramel),
                 transparent
             );
-            "
-        ></div>
+        "
+    ></div>
 
-        <div class="max-w-6xl mx-auto">
+    <div class="max-w-4xl mx-auto text-center">
 
-            <!-- Top Footer -->
-            <div class="grid md:grid-cols-4 gap-10 mb-12">
+        <!-- Logo / Brand -->
+        <h3
+            class="serif-font text-3xl font-bold mb-2"
+            style="color: var(--latte);"
+        >
+            Warung Kopi
+            <span style="color: var(--caramel);">Surup</span>
+        </h3>
 
-            <!-- Brand -->
-            <div>
-                <h3
-                class="serif-font text-2xl font-bold mb-3"
-                style="color: var(--latte);"
-                >
-                Warung Kopi
-                <span style="color: var(--caramel)">Surup</span>
-                </h3>
+        <p
+            class="text-sm mb-5"
+            style="color: var(--latte); opacity: .75;"
+        >
+            Menyeduh cerita, satu cangkir sekaligus.
+        </p>
 
-                <p
-                class="text-sm leading-relaxed"
-                style="color: var(--latte); opacity: .75;"
-                >
-                Tempat menikmati kopi, berbagi cerita, dan menemukan suasana
-                hangat di setiap senja.
-                </p>
-            </div>
+        <!-- Social Media -->
+        <div class="flex justify-center items-center gap-4 mb-7">
 
-            <!-- Navigasi -->
-            <div>
-                <h4
-                class="font-bold mb-4 uppercase tracking-widest text-xs"
-                style="color: var(--caramel);"
-                >
-                Navigasi
-                </h4>
-
-                <ul class="space-y-2 text-sm">
-                <li>
-                    <a href="#tentang" class="hover:opacity-100 transition"
-                    style="color: var(--latte); opacity: .7;">
-                    Tentang Kami
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#menu" class="hover:opacity-100 transition"
-                    style="color: var(--latte); opacity: .7;">
-                    Menu Kopi
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#galeri" class="hover:opacity-100 transition"
-                    style="color: var(--latte); opacity: .7;">
-                    Galeri
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#lokasi" class="hover:opacity-100 transition"
-                    style="color: var(--latte); opacity: .7;">
-                    Lokasi
-                    </a>
-                </li>
-                </ul>
-            </div>
-
-            <!-- Informasi -->
-            <div>
-                <h4
-                class="font-bold mb-4 uppercase tracking-widest text-xs"
-                style="color: var(--caramel);"
-                >
-                Informasi
-                </h4>
-
-                <ul
-                class="space-y-2 text-sm"
-                style="color: var(--latte); opacity: .75;"
-                >
-                <li>📍 Andongsari, Ambulu, Jember</li>
-                <li>🕒 08.00 - 23.00 WIB</li>
-                <li>☕ Kopi Tradisional & Modern</li>
-                </ul>
-            </div>
-
-            <!-- CTA -->
-            <div>
-                <h4
-                class="font-bold mb-4 uppercase tracking-widest text-xs"
-                style="color: var(--caramel);"
-                >
-                Hubungi Kami
-                </h4>
-
-                <a
+            <!-- WhatsApp -->
+            <a
                 href="https://wa.me/6285148408396"
                 target="_blank"
-                class="inline-flex items-center justify-center px-5 py-3 font-semibold transition-all duration-300 hover:scale-105"
+                aria-label="WhatsApp"
+                class="w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110 hover:-translate-y-1"
                 style="
                     background:#25D366;
                     color:white;
-                    border-radius:8px;
+                    box-shadow:0 4px 15px rgba(37,211,102,.25);
                 "
-                >
-                WhatsApp
-                </a>
-
-                <div class="flex gap-4 mt-5">
-                <a href="https://www.instagram.com/sugehmurup/" target="_blank" style="color:var(--latte);opacity:.7;">Instagram</a>
-                <a href="https://www.tiktok.com/@warung.surup?_r=1&_t=ZS-96lu0khM5mX" target="_blank" style="color:var(--latte);opacity:.7;">TikTok</a>
-                </div>
-            </div>
-
-            </div>
-
-            <!-- Divider -->
-            <div
-            class="my-6"
-            style="border-top:1px solid rgba(255,255,255,.08);"
-            ></div>
-
-            <!-- Bottom Footer -->
-            <div
-            class="flex flex-col md:flex-row items-center justify-between gap-3"
             >
-            <p
-                class="text-xs"
-                style="color: var(--latte); opacity: .5;"
-            >
-                © 2025 Warung Kopi Surup. Semua hak dilindungi.
-            </p>
+                <i class="fab fa-whatsapp text-xl"></i>
+            </a>
 
-            <p
-                class="text-xs italic"
-                style="color: var(--latte); opacity: .5;"
+            <!-- Instagram -->
+            <a
+                href="https://www.instagram.com/sugehmurup/"
+                target="_blank"
+                aria-label="Instagram"
+                class="w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110 hover:-translate-y-1"
+                style="
+                    background:linear-gradient(
+                        45deg,
+                        #F58529,
+                        #DD2A7B,
+                        #8134AF,
+                        #515BD4
+                    );
+                    color:white;
+                    box-shadow:0 4px 15px rgba(221,42,123,.25);
+                "
             >
-                “Menyeduh cerita, satu cangkir sekaligus.”
-            </p>
-            </div>
+                <i class="fab fa-instagram text-xl"></i>
+            </a>
+
+            <!-- TikTok -->
+            <a
+                href="https://www.tiktok.com/@warung.surup?_r=1&_t=ZS-96lu0khM5mX"
+                target="_blank"
+                aria-label="TikTok"
+                class="w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110 hover:-translate-y-1"
+                style="
+                    background:#111;
+                    color:white;
+                    box-shadow:0 4px 15px rgba(255,255,255,.08);
+                "
+            >
+                <i class="fab fa-tiktok text-xl"></i>
+            </a>
 
         </div>
-        </footer>
+
+        <!-- Divider -->
+        <div
+            class="w-24 h-px mx-auto mb-4"
+            style="
+                background:linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--caramel),
+                    transparent
+                );
+            "
+        ></div>
+
+        <!-- Copyright -->
+        <p
+            class="text-xs"
+            style="color: var(--latte); opacity: .55;"
+        >
+            © 2025 Warung Kopi Surup. Semua hak dilindungi.
+        </p>
+
+    </div>
+</footer>
 
         <script>
         // Intersection Observer for fade-in on scroll
