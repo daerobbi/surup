@@ -534,21 +534,26 @@
 
       <!-- Map placeholder & CTA -->
       <div class="flex flex-col gap-4">
-        <!-- Map placeholder -->
-        <div class="flex-1 flex items-center justify-center relative overflow-hidden" style="background: linear-gradient(135deg, var(--espresso) 0%, var(--mocha) 100%); border: 0.5px solid rgba(192,122,58,0.3); border-radius: 4px; min-height: 200px;">
-          <div class="text-center p-8 relative z-10">
-            <!-- Map icon -->
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" class="mx-auto mb-4 opacity-60">
-              <path d="M24 4C16.3 4 10 10.3 10 18c0 11.3 14 26 14 26S38 29.3 38 18c0-7.7-6.3-14-14-14z" stroke="var(--caramel)" stroke-width="2" fill="rgba(192,122,58,0.1)"/>
-              <circle cx="24" cy="18" r="5" stroke="var(--caramel)" stroke-width="2"/>
-            </svg>
-            <p class="serif-font text-base font-bold mb-2" style="color: var(--foam);">Warung Kopi Surup</p>
-            <p class="text-xs mb-4" style="color: var(--latte);">Andongsari, Ambulu, Jember</p>
-            <a href="https://maps.app.goo.gl/HCTHKSVZGjd8wZZC8" target="_blank" class="inline-block px-5 py-2 text-xs font-bold tracking-widest uppercase transition-all hover:opacity-80" style="background: var(--caramel); color: var(--espresso); border-radius: 2px;">
-              Buka di Maps
-            </a>
-          </div>
-        </div>
+       <div
+  class="overflow-hidden"
+  style="
+    border: 0.5px solid rgba(192,122,58,0.3);
+    border-radius: 4px;
+    min-height: 350px;
+  "
+>
+  <iframe
+    src="https://www.google.com/maps?q=Warung+Kopi+Surup+Andongsari+Ambulu+Jember&output=embed"
+    width="100%"
+    height="350"
+    style="border:0;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+<!-- -->
 
         <!-- WA CTA -->
         <a href="https://wa.me/6285148408396" target="_blank" class="flex items-center justify-center gap-3 p-4 font-bold text-sm tracking-wide transition-all duration-300 hover:opacity-90" style="background: #25D366; color: white; border-radius: 4px;">
