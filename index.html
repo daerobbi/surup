@@ -129,6 +129,21 @@
             ::-webkit-scrollbar { width: 6px; }
             ::-webkit-scrollbar-track { background: var(--espresso); }
             ::-webkit-scrollbar-thumb { background: var(--mocha); border-radius: 3px; }
+
+        
+
+            @keyframes floatLogo {
+                0%,100% {
+                    filter:
+                    drop-shadow(0 0 10px rgba(192,122,58,.2));
+                }
+                50% {
+                    filter:
+                    drop-shadow(0 0 30px rgba(192,122,58,.5));
+                }
+            }
+
+
         </style>
         </head>
         <body>
@@ -153,7 +168,8 @@
         <img
             src="logo.png"
             alt="Logo Kopi Surup"
-            class="h-20 w-auto object-contain"
+            class="h-20 w-auto object-contain animate-[floatLogo_5s_ease-in-out_infinite]"
+            style="filter: drop-shadow(0 15px 30px rgba(0,0,0,0.35));"
         />
 
         <span
@@ -273,42 +289,44 @@
             </div>
             <div class="grid md:grid-cols-2 gap-16 items-center mt-10">
             <!-- Visual side -->
-            <div class="relative">
-                <div class="relative overflow-hidden" style="border-radius: 4px;">
-                <!-- Faux photo placeholder with coffee art -->
-                <div class="aspect-[4/5] flex items-center justify-center relative" style="background: linear-gradient(135deg, var(--mocha) 0%, var(--espresso) 100%);">
-                    <!-- Coffee bean pattern -->
-                    <svg width="100%" height="100%" viewBox="0 0 300 375" fill="none" class="absolute inset-0 opacity-20">
-                    <circle cx="60" cy="80" r="18" stroke="var(--caramel)" stroke-width="1.5"/>
-                    <path d="M60 62 Q60 80 60 98" stroke="var(--caramel)" stroke-width="1"/>
-                    <circle cx="240" cy="140" r="22" stroke="var(--latte)" stroke-width="1.5"/>
-                    <path d="M240 118 Q240 140 240 162" stroke="var(--latte)" stroke-width="1"/>
-                    <circle cx="150" cy="220" r="28" stroke="var(--caramel)" stroke-width="1.5"/>
-                    <path d="M150 192 Q150 220 150 248" stroke="var(--caramel)" stroke-width="1"/>
-                    <circle cx="80" cy="300" r="16" stroke="var(--latte)" stroke-width="1"/>
-                    <path d="M80 284 Q80 300 80 316" stroke="var(--latte)" stroke-width="0.8"/>
-                    <circle cx="230" cy="320" r="20" stroke="var(--caramel)" stroke-width="1"/>
-                    <path d="M230 300 Q230 320 230 340" stroke="var(--caramel)" stroke-width="0.8"/>
-                    </svg>
-                    <!-- Large coffee icon center -->
-                    <div class="relative z-10 text-center">
-                    <svg width="100" height="120" viewBox="0 0 100 120" fill="none">
-                        <ellipse cx="50" cy="38" rx="32" ry="9" stroke="var(--caramel)" stroke-width="2"/>
-                        <path d="M18 38 L14 95" stroke="var(--caramel)" stroke-width="2"/>
-                        <path d="M82 38 L86 95" stroke="var(--caramel)" stroke-width="2"/>
-                        <ellipse cx="50" cy="95" rx="36" ry="9" stroke="var(--caramel)" stroke-width="2"/>
-                        <path d="M82 60 Q100 60 100 72 Q100 84 82 84" stroke="var(--latte)" stroke-width="2" fill="none"/>
-                    </svg>
-                    <p class="script-font mt-4" style="font-size: 1.8rem; color: var(--latte);">sejak 2010</p>
+                <div class="relative">
+                    <div class="relative overflow-hidden" style="border-radius: 4px;">
+                        <!-- Background -->
+                        <div class="aspect-[4/5] flex items-center justify-center relative"
+                            style="background: linear-gradient(135deg, var(--mocha) 0%, var(--espresso) 100%);">
+                            <!-- Logo Surup -->
+                            <div class="relative z-10 flex items-center justify-center w-full h-full px-6">
+                                <img
+                                    src="logo.png"
+                                    alt="Logo Warung Kopi Surup"
+                                    class="w-full max-w-[480px] object-contain animate-[floatLogo_5s_ease-in-out_infinite]"
+                                    style="
+                                        filter: drop-shadow(0 15px 30px rgba(0,0,0,0.35));
+                                    "
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Badge -->
+                    <div
+                        class="absolute -bottom-5 -right-5 p-5 text-center z-20"
+                        style="
+                            background: var(--caramel);
+                            border-radius: 4px;
+                            min-width: 125px;
+                            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+                        ">
+                        <p class="serif-font font-bold text-3xl"
+                            style="color: var(--espresso);">
+                            15+
+                        </p>
+                        <p class="text-xs font-bold uppercase tracking-wider mt-1"
+                            style="color: var(--espresso); opacity: 0.75;">
+                            Tahun Berdiri
+                        </p>
                     </div>
                 </div>
-                </div>
-                <!-- Floating badge -->
-                <div class="absolute -bottom-6 -right-6 p-5 text-center" style="background: var(--caramel); border-radius: 2px; min-width: 110px;">
-                <p class="serif-font font-bold text-3xl" style="color: var(--espresso);">15+</p>
-                <p class="text-xs font-bold uppercase tracking-wider mt-1" style="color: var(--espresso); opacity: 0.75;">Tahun Berdiri</p>
-                </div>
-            </div>
 
             <!-- Text side -->
             <div>
